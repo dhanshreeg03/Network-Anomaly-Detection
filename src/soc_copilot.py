@@ -2,10 +2,11 @@ import os
 import requests
 import json
 from typing import Dict, Any, List, Optional
-from dotenv import load_dotenv
-
-# Load GEMINI_API_KEY from .env file
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 class SOCCopilot:
     """

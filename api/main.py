@@ -11,10 +11,12 @@ from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
-# Load environment variables from .env
-load_dotenv()
 
 # Ensure root directory is on Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
