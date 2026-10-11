@@ -14,6 +14,7 @@ from xgboost import XGBClassifier
 from sklearn.metrics import (accuracy_score, precision_score, recall_score, f1_score,
                              classification_report, confusion_matrix)
 import warnings
+import os
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -36,7 +37,8 @@ def get_preprocessor(X):
 
 def main():
     print("=== MODEL COMPARISON AND VALIDATION ===")
-    df = pd.read_csv(r'D:\Netwrok\data_dir\cyberguard_synthetic_demo (1).csv')
+    data_path = 'data/cyberguard_synthetic_demo (1).csv' if os.path.exists('data/cyberguard_synthetic_demo (1).csv') else 'cyberguard_synthetic_demo (1).csv'
+    df = pd.read_csv(data_path)
     
     # Drop artificial features
     # ID is sequential identifier
@@ -185,6 +187,7 @@ def main():
     plt.ylabel('Actual')
     plt.xlabel('Predicted')
     plt.tight_layout()
+    os.makedirs('outputs/evaluation', exist_ok=True)
     plt.savefig('outputs/evaluation/confusion_matrix_final.png')
 
 if __name__ == '__main__':

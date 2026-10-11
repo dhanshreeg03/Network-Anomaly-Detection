@@ -1,8 +1,10 @@
 import pandas as pd
 import numpy as np
+import os
 
 # Load the dataset
-df = pd.read_csv('cyberguard_synthetic_demo (1).csv')
+data_path = 'data/cyberguard_synthetic_demo (1).csv' if os.path.exists('data/cyberguard_synthetic_demo (1).csv') else 'cyberguard_synthetic_demo (1).csv'
+df = pd.read_csv(data_path)
 
 print("=== DATASET SHAPE ===")
 print(df.shape)

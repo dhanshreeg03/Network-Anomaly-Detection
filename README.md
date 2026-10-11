@@ -71,16 +71,41 @@ The model analyzes the following 11 network flow features:
 - `bytes_per_second`
 - `tcp_flags`
 
-## 8. Dashboard
-The interactive dashboard is built using Streamlit and provides a dynamic interface to perform traffic detection, view detailed reports, investigate specific flows, and analyze aggregate metrics.
+## 8. Application & Deployment
+
+The system offers two deployment interfaces:
+
+### A. Production Web Dashboard & REST API (FastAPI)
+The primary deployment uses **FastAPI** with an async REST API and a responsive modern web dashboard.
+```bash
+# Start FastAPI server
+python -m uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+```
+* **Web Dashboard**: [http://localhost:8000](http://localhost:8000)
+* **Interactive OpenAPI Swagger Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+* **Key Endpoints**:
+  * `POST /api/predict`: Single network flow inference with severity assessment.
+  * `POST /api/predict/batch-file`: CSV file upload for batch threat classification.
+  * `POST /api/simulate`: Interactive What-If perturbation analysis.
+  * `GET /api/demo-data`: Pre-loaded benchmark evaluation.
+  * `GET /api/alerts`: Persistent security incident ledger.
+
+### B. Prototyping Dashboard (Streamlit)
+```bash
+streamlit run dashboard/app.py
+```
+
+### C. Containerized Docker Deployment
+```bash
+docker build -t cyberguard-nids .
+docker run -p 8000:8000 cyberguard-nids
+```
 
 ## 9. Technology Stack
-- **Python**: Core programming language
-- **Pandas & NumPy**: Data manipulation and numerical operations
-- **Scikit-learn**: Machine learning model building and preprocessing
-- **Streamlit**: Interactive web dashboard
-- **Plotly**: Interactive data visualizations
-- **Joblib**: Model serialization
+- **Backend & ML Serving**: FastAPI, Uvicorn, Pydantic, Scikit-learn, Joblib
+- **Data Manipulation**: Pandas, NumPy
+- **Frontend & Visualizations**: HTML5, CSS3, JavaScript, Chart.js, Plotly, Streamlit
+- **Containerization**: Docker
 
 ## 10. Project Structure
 ```text

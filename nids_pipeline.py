@@ -8,13 +8,14 @@ from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+import os
 import joblib
 
 def main():
     print("=== CyberGuard NIDS Pipeline ===")
     
     # 1. Load the dataset
-    data_path = 'cyberguard_synthetic_demo (1).csv'
+    data_path = 'data/cyberguard_synthetic_demo (1).csv' if os.path.exists('data/cyberguard_synthetic_demo (1).csv') else 'cyberguard_synthetic_demo (1).csv'
     df = pd.read_csv(data_path)
     
     # 2. Investigate Artificial Labels / Data Leakage
@@ -111,9 +112,10 @@ def main():
     print(feature_importance_df.head(10))
     
     # Save the pipeline for future use
-    joblib.dump(pipeline, 'nids_pipeline.pkl')
-    joblib.dump(le, 'label_encoder.pkl')
-    print("\nModel pipeline and label encoder saved successfully.")
+    os.makedirs('models', exist_ok=True)
+    joblib.dump(pipeline, 'models/nids_pipeline.pkl')
+    joblib.dump(le, 'models/label_encoder.pkl')
+    print("\nModel pipeline and label encoder saved successfully to models/ directory.")
 
 if __name__ == "__main__":
     main()

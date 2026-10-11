@@ -1,11 +1,13 @@
 import pandas as pd
 import numpy as np
+import os
 from sklearn.feature_selection import mutual_info_classif
 from sklearn.preprocessing import LabelEncoder
 
 def main():
     print("=== DATA VALIDATION & LEAKAGE INVESTIGATION ===")
-    df = pd.read_csv('cyberguard_synthetic_demo (1).csv')
+    data_path = 'data/cyberguard_synthetic_demo (1).csv' if os.path.exists('data/cyberguard_synthetic_demo (1).csv') else 'cyberguard_synthetic_demo (1).csv'
+    df = pd.read_csv(data_path)
     
     # 1. Duplicates check
     print("\n--- Duplicate Analysis ---")
