@@ -20,8 +20,10 @@ ENV/
 .DS_Store
 Thumbs.db
 
-# Streamlit secrets
+# Streamlit secrets & env
 .streamlit/secrets.toml
+.env
+.env.local
 
 # Logs and temp files
 *.log
